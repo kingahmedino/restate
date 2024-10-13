@@ -2,8 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:restate/theme/theme.dart';
 import 'package:svg_flutter/svg.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  late Animation<int> _buyNumberAnimation;
+  late Animation<int> _rentNumberAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
+
+    _buyNumberAnimation = IntTween(begin: 0, end: 1034).animate(_controller);
+    _rentNumberAnimation = IntTween(begin: 0, end: 2212).animate(_controller);
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,93 +69,97 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const RestateTopBar(
-                      location: 'Saint Petersburg',
-                      avatarUrl: 'https://picsum.photos/200/300',
-                    ),
+                    const RestateTopBar(location: 'Saint Petersburg'),
                     const RestateHeroText(name: 'Marina'),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 24),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(20.0),
-                              decoration: const BoxDecoration(
-                                color: RestateTheme.primaryColor,
-                                shape: BoxShape.circle,
+                      child: AnimatedBuilder(
+                        animation: _controller,
+                        builder: (context, child) {
+                          return Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.all(20.0),
+                                  decoration: const BoxDecoration(
+                                    color: RestateTheme.primaryColor,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Text('BUY',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(color: Colors.white)),
+                                      const SizedBox(height: 36),
+                                      Text(_buyNumberAnimation.value.toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge
+                                              ?.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 40,
+                                              )),
+                                      const SizedBox(height: 4),
+                                      Text('offers',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(color: Colors.white)),
+                                      const SizedBox(height: 28),
+                                    ],
+                                  ),
+                                ),
                               ),
-                              child: Column(
-                                children: [
-                                  Text('BUY',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(color: Colors.white)),
-                                  const SizedBox(height: 36),
-                                  Text('1 034',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayLarge
-                                          ?.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 40,
-                                          )),
-                                  const SizedBox(height: 4),
-                                  Text('offers',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(color: Colors.white)),
-                                  const SizedBox(height: 28),
-                                ],
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Container(
+                                  width: double.infinity,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 16),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white70,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Text('RENT',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
+                                                  color: RestateTheme
+                                                      .secondaryTextColor)),
+                                      const SizedBox(height: 36),
+                                      Text(
+                                          _rentNumberAnimation.value.toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge
+                                              ?.copyWith(
+                                                color: RestateTheme
+                                                    .secondaryTextColor,
+                                                fontSize: 40,
+                                              )),
+                                      const SizedBox(height: 4),
+                                      Text('offers',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
+                                                  color: RestateTheme
+                                                      .secondaryTextColor)),
+                                      const SizedBox(height: 28),
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              decoration: BoxDecoration(
-                                color: Colors.white70,
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: Column(
-                                children: [
-                                  Text('RENT',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                              color: RestateTheme
-                                                  .secondaryTextColor)),
-                                  const SizedBox(height: 36),
-                                  Text('2 212',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayLarge
-                                          ?.copyWith(
-                                            color:
-                                                RestateTheme.secondaryTextColor,
-                                            fontSize: 40,
-                                          )),
-                                  const SizedBox(height: 4),
-                                  Text('offers',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                              color: RestateTheme
-                                                  .secondaryTextColor)),
-                                  const SizedBox(height: 28),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                            ],
+                          );
+                        },
                       ),
                     ),
                     Container(
@@ -471,15 +507,45 @@ class RestateFullHomeCard extends StatelessWidget {
   }
 }
 
-class RestateTopBar extends StatelessWidget {
+class RestateTopBar extends StatefulWidget {
   final String location;
-  final String avatarUrl;
 
-  const RestateTopBar({
-    super.key,
-    required this.location,
-    required this.avatarUrl,
-  });
+  const RestateTopBar({super.key, required this.location});
+
+  @override
+  State<RestateTopBar> createState() => _RestateTopBarState();
+}
+
+class _RestateTopBarState extends State<RestateTopBar>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  late Animation<double> _avatarAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
+
+    _avatarAnimation = Tween<double>(begin: 0, end: 1.2).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -510,7 +576,7 @@ class RestateTopBar extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  location,
+                  widget.location,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: RestateTheme.secondaryTextColor,
                         fontWeight: FontWeight.w500,
@@ -519,13 +585,18 @@ class RestateTopBar extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            child: CircleAvatar(
-              radius: 20,
-              backgroundImage: NetworkImage(avatarUrl),
+          ScaleTransition(
+            scale: _avatarAnimation,
+            child: Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: const CircleAvatar(
+                radius: 20,
+                backgroundImage: AssetImage(
+                  'assets/images/avatar.jpeg',
+                ),
+              ),
             ),
           ),
         ],
