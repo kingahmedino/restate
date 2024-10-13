@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restate/theme/theme.dart';
+import 'package:svg_flutter/svg.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,163 +14,285 @@ class HomePage extends StatelessWidget {
     final Color mediumShade = _createLighterShade(primaryColor, 0.5);
 
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              lightShade,
-              mediumShade,
-            ],
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RestateTopBar(
-                  location: 'Saint Petersburg',
-                  avatarUrl: 'https://picsum.photos/200/300',
-                ),
-                RestateHeroText(name: 'Marina'),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(20.0),
-                          decoration: const BoxDecoration(
-                            color: RestateTheme.primaryColor,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Column(
-                            children: [
-                              Text('BUY',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(color: Colors.white)),
-                              const SizedBox(height: 36),
-                              Text('1 034',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displayLarge
-                                      ?.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 40,
-                                      )),
-                              const SizedBox(height: 4),
-                              Text('offers',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(color: Colors.white)),
-                              const SizedBox(height: 28),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          decoration: BoxDecoration(
-                            color: Colors.white70,
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Column(
-                            children: [
-                              Text('RENT',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                          color:
-                                              RestateTheme.secondaryTextColor)),
-                              const SizedBox(height: 36),
-                              Text('2 212',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displayLarge
-                                      ?.copyWith(
-                                        color: RestateTheme.secondaryTextColor,
-                                        fontSize: 40,
-                                      )),
-                              const SizedBox(height: 4),
-                              Text('offers',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                          color:
-                                              RestateTheme.secondaryTextColor)),
-                              const SizedBox(height: 28),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(28.0),
-                  ),
-                  child: const Column(
-                    children: [
-                      RestateFullHomeCard(
-                        title: 'Gladkova St., 25',
-                        imageUrl:
-                            'https://www.smithandassociates.com/uploads/qwerqwe%20(1).14.jpeg',
-                      ),
-                      SizedBox(height: 8.0),
-                      Row(
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  lightShade,
+                  mediumShade,
+                ],
+              ),
+            ),
+            child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: SafeArea(
+                left: true,
+                top: true,
+                bottom: false,
+                right: true,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const RestateTopBar(
+                      location: 'Saint Petersburg',
+                      avatarUrl: 'https://picsum.photos/200/300',
+                    ),
+                    const RestateHeroText(name: 'Marina'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 24),
+                      child: Row(
                         children: [
                           Expanded(
-                            child: RestateHalfHomeCard(
-                              title: 'Gubina St., 11',
-                              imageUrl:
-                                  'https://www.picturecorrect.com/wp-content/uploads/2014/02/real-estate-photography-2.jpg',
-                              height: 360,
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(20.0),
+                              decoration: const BoxDecoration(
+                                color: RestateTheme.primaryColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Column(
+                                children: [
+                                  Text('BUY',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(color: Colors.white)),
+                                  const SizedBox(height: 36),
+                                  Text('1 034',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge
+                                          ?.copyWith(
+                                            color: Colors.white,
+                                            fontSize: 40,
+                                          )),
+                                  const SizedBox(height: 4),
+                                  Text('offers',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(color: Colors.white)),
+                                  const SizedBox(height: 28),
+                                ],
+                              ),
                             ),
                           ),
-                          SizedBox(width: 8.0),
+                          const SizedBox(width: 12),
                           Expanded(
-                            child: Column(
-                              children: [
-                                RestateHalfHomeCard(
-                                  title: 'Trefoleva St., 43',
-                                  imageUrl:
-                                      'https://www.digitalphotomentor.com/photography/2018/09/real-estate-photography-two-wall-rule-example-5.jpg',
-                                  height: 180,
-                                ),
-                                SizedBox(height: 8.0),
-                                RestateHalfHomeCard(
-                                  title: 'Sedova St., 42',
-                                  imageUrl:
-                                      'https://www.shalinimisra.com/wp-content/uploads/2022/08/living-room-space-1024x745-1.jpeg',
-                                  height: 180,
-                                ),
-                              ],
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              decoration: BoxDecoration(
+                                color: Colors.white70,
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              child: Column(
+                                children: [
+                                  Text('RENT',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                              color: RestateTheme
+                                                  .secondaryTextColor)),
+                                  const SizedBox(height: 36),
+                                  Text('2 212',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge
+                                          ?.copyWith(
+                                            color:
+                                                RestateTheme.secondaryTextColor,
+                                            fontSize: 40,
+                                          )),
+                                  const SizedBox(height: 4),
+                                  Text('offers',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                              color: RestateTheme
+                                                  .secondaryTextColor)),
+                                  const SizedBox(height: 28),
+                                ],
+                              ),
                             ),
                           ),
                         ],
-                      )
-                    ],
-                  ),
-                )
-              ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(28.0),
+                      ),
+                      child: const Column(
+                        children: [
+                          RestateFullHomeCard(
+                            title: 'Gladkova St., 25',
+                            imageUrl:
+                                'https://www.smithandassociates.com/uploads/qwerqwe%20(1).14.jpeg',
+                          ),
+                          SizedBox(height: 8.0),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: RestateHalfHomeCard(
+                                  title: 'Gubina St., 11',
+                                  imageUrl:
+                                      'https://www.picturecorrect.com/wp-content/uploads/2014/02/real-estate-photography-2.jpg',
+                                  height: 360,
+                                ),
+                              ),
+                              SizedBox(width: 8.0),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    RestateHalfHomeCard(
+                                      title: 'Trefoleva St., 43',
+                                      imageUrl:
+                                          'https://www.digitalphotomentor.com/photography/2018/09/real-estate-photography-two-wall-rule-example-5.jpg',
+                                      height: 180,
+                                    ),
+                                    SizedBox(height: 8.0),
+                                    RestateHalfHomeCard(
+                                      title: 'Sedova St., 42',
+                                      imageUrl:
+                                          'https://www.shalinimisra.com/wp-content/uploads/2022/08/living-room-space-1024x745-1.jpeg',
+                                      height: 180,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
+          Positioned(
+            left: 20.0,
+            right: 20.0,
+            bottom: 36.0,
+            child: Container(
+              height: 56,
+              padding: const EdgeInsets.all(6),
+              margin: const EdgeInsets.symmetric(horizontal: 40.0),
+              decoration: BoxDecoration(
+                color: const Color(0xFF2B2B2B),
+                borderRadius: BorderRadius.circular(36.0),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 48.0,
+                    height: 48.0,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Color(0xFF232220)),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: SvgPicture.asset(
+                        'assets/svgs/search.svg',
+                        width: 18.0,
+                        height: 18.0,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 48.0,
+                    height: 48.0,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Color(0xFF232220)),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: SvgPicture.asset(
+                        'assets/svgs/chat.svg',
+                        width: 18.0,
+                        height: 18.0,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 48.0,
+                    height: 48.0,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Color(0xFF232220)),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: SvgPicture.asset(
+                        'assets/svgs/home.svg',
+                        width: 18.0,
+                        height: 18.0,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 48.0,
+                    height: 48.0,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Color(0xFF232220)),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: SvgPicture.asset(
+                        'assets/svgs/heart.svg',
+                        width: 18.0,
+                        height: 18.0,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 48.0,
+                    height: 48.0,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Color(0xFF232220)),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: SvgPicture.asset(
+                        'assets/svgs/user.svg',
+                        width: 18.0,
+                        height: 18.0,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -373,10 +496,17 @@ class RestateTopBar extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(
-                  Icons.location_on,
-                  size: 16,
-                  color: RestateTheme.secondaryTextColor,
+                Align(
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    'assets/svgs/marker.svg',
+                    width: 16.0,
+                    height: 16.0,
+                    colorFilter: const ColorFilter.mode(
+                      RestateTheme.secondaryTextColor,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 4),
                 Text(
