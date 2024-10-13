@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:restate/pages/widgets.dart';
 import 'package:restate/theme/theme.dart';
 import 'package:svg_flutter/svg.dart';
 
@@ -202,10 +201,6 @@ class _LocationPageState extends State<LocationPage> {
                 ),
               ),
               const SizedBox(height: 18.0),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
-                child: BottomNavigationWidget(),
-              )
             ],
           ),
         ),

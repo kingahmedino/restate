@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:restate/helpers/functions.dart';
-import 'package:restate/pages/widgets.dart';
 import 'package:restate/theme/theme.dart';
 import 'package:svg_flutter/svg.dart';
 
@@ -224,12 +223,6 @@ class _HomePageState extends State<HomePage>
               ),
             ),
           ),
-          const Positioned(
-            left: 12.0,
-            right: 12.0,
-            bottom: 36.0,
-            child: BottomNavigationWidget(),
-          )
         ],
       ),
     );
