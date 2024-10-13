@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restate/pages/home.dart';
+import 'package:restate/pages/location.dart';
 import 'package:restate/theme/theme.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Restate',
       theme: RestateTheme.lightTheme(),
       darkTheme: RestateTheme.darkTheme(),
-      home: const HomePage(),
+      home: const LocationPage(),
     );
   }
 }
