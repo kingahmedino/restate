@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:restate/helpers/functions.dart';
 import 'package:restate/theme/theme.dart';
 import 'package:svg_flutter/svg.dart';
 
@@ -95,7 +97,9 @@ class _HomePageState extends State<HomePage>
                                               .bodySmall
                                               ?.copyWith(color: Colors.white)),
                                       const SizedBox(height: 36),
-                                      Text(_buyNumberAnimation.value.toString(),
+                                      Text(
+                                          formatNumber(_buyNumberAnimation.value
+                                              .toInt()),
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayLarge
@@ -135,7 +139,9 @@ class _HomePageState extends State<HomePage>
                                                       .secondaryTextColor)),
                                       const SizedBox(height: 36),
                                       Text(
-                                          _rentNumberAnimation.value.toString(),
+                                          formatNumber(_rentNumberAnimation
+                                              .value
+                                              .toInt()),
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayLarge
@@ -208,9 +214,7 @@ class _HomePageState extends State<HomePage>
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 20.0,
-                          ),
+                          SizedBox(height: 20.0),
                         ],
                       ),
                     )
@@ -220,12 +224,11 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           Positioned(
-            left: 20.0,
-            right: 20.0,
+            left: 12.0,
+            right: 12.0,
             bottom: 36.0,
             child: Container(
-              height: 56,
-              padding: const EdgeInsets.all(6),
+              padding: const EdgeInsets.all(4),
               margin: const EdgeInsets.symmetric(horizontal: 40.0),
               decoration: BoxDecoration(
                 color: const Color(0xFF2B2B2B),
@@ -271,10 +274,11 @@ class _HomePageState extends State<HomePage>
                     ),
                   ),
                   Container(
-                    width: 48.0,
-                    height: 48.0,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: Color(0xFF232220)),
+                    width: 56.0,
+                    height: 56.0,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).primaryColor),
                     child: Align(
                       alignment: Alignment.center,
                       child: SvgPicture.asset(
@@ -507,45 +511,10 @@ class RestateFullHomeCard extends StatelessWidget {
   }
 }
 
-class RestateTopBar extends StatefulWidget {
+class RestateTopBar extends StatelessWidget {
   final String location;
 
   const RestateTopBar({super.key, required this.location});
-
-  @override
-  State<RestateTopBar> createState() => _RestateTopBarState();
-}
-
-class _RestateTopBarState extends State<RestateTopBar>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  late Animation<double> _avatarAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = AnimationController(
-      duration: const Duration(seconds: 2),
-      vsync: this,
-    );
-
-    _avatarAnimation = Tween<double>(begin: 0, end: 1.2).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOut,
-      ),
-    );
-
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -576,29 +545,28 @@ class _RestateTopBarState extends State<RestateTopBar>
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  widget.location,
+                  location,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: RestateTheme.secondaryTextColor,
                         fontWeight: FontWeight.w500,
                       ),
                 ),
               ],
+            ).animate().fade(delay: 1.seconds, duration: 1.seconds),
+          )
+              .animate()
+              .scaleX(duration: 1.seconds, alignment: Alignment.centerLeft),
+          Container(
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
             ),
-          ),
-          ScaleTransition(
-            scale: _avatarAnimation,
-            child: Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-              child: const CircleAvatar(
-                radius: 20,
-                backgroundImage: AssetImage(
-                  'assets/images/avatar.jpeg',
-                ),
+            child: const CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage(
+                'assets/images/avatar.jpeg',
               ),
             ),
-          ),
+          ).animate().scale(duration: 1.seconds),
         ],
       ),
     );
@@ -623,13 +591,24 @@ class RestateHeroText extends StatelessWidget {
           Text('Hi, $name',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontSize: 20.0,
-                  )),
+                  )).animate().fade(duration: 2.seconds),
           const SizedBox(height: 6),
-          Text("let's select your\nperfect place",
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineLarge
-                  ?.copyWith(height: 1.1, fontSize: 36)),
+          Text(
+            "let's select your",
+            style: Theme.of(context)
+                .textTheme
+                .headlineLarge
+                ?.copyWith(height: 1.1, fontSize: 36),
+          ).animate().moveY(duration: 2.seconds, begin: 20, end: 0),
+          Text(
+            "perfect place",
+            style: Theme.of(context)
+                .textTheme
+                .headlineLarge
+                ?.copyWith(height: 1.1, fontSize: 36),
+          )
+              .animate()
+              .moveY(delay: 500.ms, duration: 2.seconds, begin: 20, end: 0),
         ],
       ),
     );

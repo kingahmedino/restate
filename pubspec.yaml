@@ -10,6 +10,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
+  flutter_animate: ^4.5.0
   svg_flutter: ^0.0.1
 
 dev_dependencies:
