@@ -146,24 +146,58 @@ class _LocationPageState extends State<LocationPage> {
                           ),
                         ).animate().scale(duration: 700.ms),
                         const SizedBox(height: 6.0),
-                        Container(
-                          width: 48.0,
-                          height: 48.0,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Color(0xFF757575)),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: SvgPicture.asset(
-                              'assets/svgs/location-arrow.svg',
-                              width: 18.0,
-                              height: 18.0,
-                              colorFilter: const ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
+                        PopupMenuButton(
+                          color: const Color(0xFFFBF5EB),
+                          itemBuilder: (context) => [
+                            const PopupMenuItem(
+                              child: RestatePopupMenuItem(
+                                image: 'assets/svgs/shield-check.svg',
+                                title: 'Cosy areas',
                               ),
                             ),
+                            PopupMenuItem(
+                              child: RestatePopupMenuItem(
+                                image: 'assets/svgs/wallet.svg',
+                                title: 'Price',
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                            const PopupMenuItem(
+                              child: RestatePopupMenuItem(
+                                image: 'assets/svgs/bridge.svg',
+                                title: 'Infrastructure',
+                              ),
+                            ),
+                            const PopupMenuItem(
+                              child: RestatePopupMenuItem(
+                                image: 'assets/svgs/layers.svg',
+                                title: 'Without any layer',
+                              ),
+                            ),
+                          ],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
-                        ).animate().scale(duration: 700.ms),
+                          child: Container(
+                            width: 48.0,
+                            height: 48.0,
+                            decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xFF757575)),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: SvgPicture.asset(
+                                'assets/svgs/location-arrow.svg',
+                                width: 18.0,
+                                height: 18.0,
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                            ),
+                          ).animate().scale(duration: 700.ms),
+                        ),
                       ],
                     ),
                     Container(
@@ -206,6 +240,47 @@ class _LocationPageState extends State<LocationPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class RestatePopupMenuItem extends StatelessWidget {
+  const RestatePopupMenuItem({
+    super.key,
+    required this.image,
+    required this.title,
+    this.color = RestateTheme.primaryTextColor,
+  });
+
+  final String image;
+  final String title;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Align(
+          alignment: Alignment.center,
+          child: SvgPicture.asset(
+            image,
+            width: 18.0,
+            height: 18.0,
+            colorFilter: ColorFilter.mode(
+              color,
+              BlendMode.srcIn,
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Text(
+          title,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium
+              ?.copyWith(fontSize: 12.0, color: color),
+        )
+      ],
     );
   }
 }
