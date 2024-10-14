@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:restate/pages/home.dart';
 import 'package:restate/pages/location.dart';
 import 'package:restate/pages/widgets.dart';
@@ -43,7 +44,7 @@ class _MyAppState extends State<MyApp> {
                 _currentIndex = index;
               });
             },
-          ),
+          ).animate().moveY(duration: 1.seconds, begin: 100, end: 0),
         ),
       ),
     );

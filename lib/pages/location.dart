@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restate/theme/theme.dart';
 import 'package:svg_flutter/svg.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class LocationPage extends StatefulWidget {
   const LocationPage({super.key});
@@ -143,7 +144,7 @@ class _LocationPageState extends State<LocationPage> {
                               ),
                             ),
                           ),
-                        ),
+                        ).animate().scale(duration: 700.ms),
                         const SizedBox(height: 6.0),
                         Container(
                           width: 48.0,
@@ -162,7 +163,7 @@ class _LocationPageState extends State<LocationPage> {
                               ),
                             ),
                           ),
-                        ),
+                        ).animate().scale(duration: 700.ms),
                       ],
                     ),
                     Container(
@@ -196,7 +197,7 @@ class _LocationPageState extends State<LocationPage> {
                           ),
                         ],
                       ),
-                    ),
+                    ).animate().scale(duration: 700.ms),
                   ],
                 ),
               ),
@@ -234,7 +235,7 @@ class MapMarker extends StatelessWidget {
             .textTheme
             .bodyMedium
             ?.copyWith(color: Colors.white),
-      ),
-    );
+      ).animate(delay: 800.ms).fadeIn(duration: 500.ms),
+    ).animate().scale(duration: 800.ms, alignment: Alignment.bottomLeft);
   }
 }
